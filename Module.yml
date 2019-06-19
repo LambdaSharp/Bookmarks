@@ -1,0 +1,50 @@
+Module: LambdaSharp.Challenge.Bookmarker
+Version: 1.0-DEV
+Description: Bookmark Manager with URL shortener and preview features.
+Items:
+
+  - Resource: BookmarksTable
+    Scope: all
+    Description: DynamoDB for storing all the bookmark data
+    Type: AWS::DynamoDB::Table
+    Allow: Subscribe
+    Allow: ReadWrite
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: ID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ID
+          KeyType: HASH
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
+
+  - Function: DynamoFunction
+    Description: This function is invoked by a DynamoDB stream when a new bookmark is added
+    Memory: 128
+    Timeout: 60
+    Sources:
+      - DynamoDB: BookmarksTable
+        BatchSize: 1
+
+  - Function: ApiFunctions
+    Description: API Gateway functions which implements Bookmark REST API
+    Memory: 256
+    Timeout: 30
+    Sources:
+      - Api: POST:/bookmarks
+        Invoke: AddBookmark
+      - Api: GET:/bookmarks/{id}
+        Invoke: GetBookmark
+      - Api: GET:/bookmarks
+        Invoke: GetBookmarks
+      - Api: DELETE:/bookmarks/{id}
+        Invoke: DeleteBookmark
+      - Api: GET:/preview/{id}
+        Invoke: GetBookmarkPreview
+
+  - Variable: ApiUrl
+    Description: API Gateway URL
+    Scope: public
+    Value: !Ref Module::RestApi::Url
