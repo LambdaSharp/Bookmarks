@@ -42,7 +42,7 @@ namespace LambdaSharp.Challenge.Bookmarker.DynamoFunction {
                     Url = url,
                     Title = "Replace with OpenGraph data",
                     Description = "Replace with OpenGraph data",
-                    ImageUrl = new Uri("replace_with_open_graph_data.png"),
+                    ImageUrl = new Uri("https://replace_with_open_graph_data.png"),
                 };
                 LogInfo($"Updated Bookmark:\n{SerializeJson(bookmark)}");
                 _table.PutItemAsync(Document.FromJson(SerializeJson(bookmark))).Wait();

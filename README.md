@@ -52,17 +52,37 @@ If you already have the LambdaSharp Tool installed, unfortunately you cannot  si
 ### Clone Bookmarker repository
 
 ```
-git clone git@github.com:LambdaSharp/Bookmarker.git
+git clone git@github.com:LambdaSharp/Bookmarks.git
 ```
 
 ### Build and Deploy
 
 ```
-cd Bookmarker
+cd Bookmarks
 lash init --quick-start     // one time
 lash deploy                 // to propagate code changes
 ```
 
+## Level 0 -- Add URL to DynamoDB
+Invoke the POST endpoint of the API Gateway that was created when you ran `lash deploy` to add a URL to DynamoDB. You can do this through the Postman collection that is provided or through a Curl command in your terminal. You will need to grab the `ApiUrl: API Gateway URL` that is printed at the end of the `lash deploy` command. 
+
+### Postman
+* Import the [collection](./postman_collection.json) into Postman by clicking the `Import` button on the top left of the application. 
+
+* Add a Global variable `bookmark_api`, and set the value to the `ApiUrl` that was printed. 
+
+* Run the `New Bookmark` request. 
+
+
+### Curl
+```
+curl -X POST \
+  https://{YOUR_API_GATEWAY_URL}/LATEST/bookmarks \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "Url": "https://www.youtube.com/watch?v=M5NVwuyk2uM"
+}'
+```
 
 ## Level 1 -- Support Short URLs
 
