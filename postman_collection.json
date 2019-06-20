@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "e143c6c1-35d7-4fe2-8dcd-5b44cb2268ae",
+		"name": "Bookmarker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Bookmark",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Url\": \"https://www.youtube.com/watch?v=M5NVwuyk2uM\"\n}"
+				},
+				"url": {
+					"raw": "{{bookmark_api}}/bookmarks",
+					"host": [
+						"{{bookmark_api}}"
+					],
+					"path": [
+						"bookmarks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bookmark",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{bookmark_api}}/bookmarks/:id",
+					"host": [
+						"{{bookmark_api}}"
+					],
+					"path": [
+						"bookmarks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Bookmarks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{bookmark_api}}/bookmarks",
+					"host": [
+						"{{bookmark_api}}"
+					],
+					"path": [
+						"bookmarks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Bookmark",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{bookmark_api}}/bookmarks/:id",
+					"host": [
+						"{{bookmark_api}}"
+					],
+					"path": [
+						"bookmarks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Preview Bookmark",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{bookmark_api}}/preview/:id",
+					"host": [
+						"{{bookmark_api}}"
+					],
+					"path": [
+						"preview",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
